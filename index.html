@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--  -->
+    <title>Rhema fiesta profile picture</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <!-- Alpine scripts -->
+    <script defer src="/scripts/alpine-cdn.min.js"></script>
+    <!-- tailwind  -->
+    <script src="/scripts/tailwind-dev-3.2.1.js"></script>
+    <!--  -->
+    <link rel="stylesheet" href="croppie.css" />
+    <script src="croppie.js"></script>
+    <script src="html2canvas.js"></script>
+    <script src="FileSaver.js"></script>
+    <!-- animate on scroll styles -->
+    <link rel="stylesheet" href="/style/style.css" />
+    <!-- alpinejs visibity cloak -->
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body >
+    <!-- landing -->
+    <div 
+        class="p-8 md:mx-auto w-full lg:w-1/3 md:w-1/2"
+
+        x-data='{
+            crop: null,
+
+            first_name: "",
+            last_name:"",
+
+            has_image: function(){
+                this.$nextTick(() => { 
+                    return this.$refs.upload.files[0]
+                 });
+            },
+
+            loadImage: function(e){
+                if(FileReader && e.target.files && e.target.files.length){
+                    var file_reader = new FileReader();
+                    file_reader.onload = () => {
+                        this.crop.bind({
+                            url: file_reader.result,
+                        })
+                    }
+                    file_reader.readAsDataURL(e.target.files[0]);
+                }
+            },
+
+            getResult: function(){
+                this.crop.result({type:"blob", size: "original"}).then((blob) => {
+                    this.$refs.final.src = URL.createObjectURL(blob);
+                })
+            },
+
+            downloadImage: function(){
+                html2canvas(this.$refs.picture_ready, {
+                    scale: 4
+                }).then(canvas => {
+                    canvas.toBlob((blob) => {
+                        window.saveAs(blob, "rhema-fiesta.png");
+                    });
+                });
+            },
+
+        }'
+
+        x-init="
+            crop = new Croppie($refs.croppie, {
+                showZoomer: true,        
+            })
+        "
+        >
+        <!-- title -->
+        <h3 class="text-xl text-purple-700 capitalize mb-4">create your rhema fiesta profile picture</h3>
+        <!-- step 1 -->
+        <p class="capitalize"> <strong>Step 1.</strong> Enter your first name and last name</p>
+        <div class="space-y-4">
+            <div class="flex flex-col">
+                <label for="" class="text-sm">First Name</label>
+                <input type="text" x-model="first_name" class="p-3 bg-neutral-200">
+            </div>
+            <div class="flex flex-col">
+                <label for="" class="text-sm">Last Name</label>
+                <input type="text" x-model="last_name" class="p-3 bg-neutral-200">
+            </div>
+        </div>
+        <hr class="my-3">
+        <!-- step 2 -->
+        <p class="capitalize mb-4"> <strong>Step 2.</strong> Choose a picture</p>
+        <div class="flex flex-col space-y-4">
+            <input x-ref="upload" @change="loadImage" type="file" accept="image/*,.png,.jpg" capture name="" id="">
+            <div x-ref="croppie" class="w-80 h-80 bg-neutral-200 rounded-lg"></div>
+            <p class="text-neutral-400 pt-10"><em>Resize and position as desired & crop</em></p>
+        </div>
+
+       <button  @click="getResult" class="p-2 ring-2 ring-purple-600 rounded-lg mt-8 bg-purple-50 text-purple-800">Crop picture</button>
+
+       <hr class="my-3">
+        <!-- step 3 -->
+        <p class="capitalize mb-4"> <strong>Step 3.</strong> Download picture</p>
+
+       <div class="w-80 h-80 relative bg-green-400" x-ref="picture_ready">
+           <img src="" class="w-full" alt="" x-ref="final">
+           <div class="text-2xl font-bold text-neutral-400 absolute bottom-0 h-16 left-0 w-full bg-[#280d2e]/[0.8] flex">
+                <img src="./logo.webp" class="h-full" alt="rhema-fiesta-logo">
+                <div class="p-2 flex-1 leading-snug flex-wrap font-bold text-base uppercase text-yellow-300">
+                    <p x-text="first_name+' '+last_name"></p>
+                    <p class="text-xs">will be @ #RF2022</p>
+                </div>
+           </div>
+       </div>
+
+       <!-- download btn -->
+       <button  @click="downloadImage" class="p-3 mt-4 ring-2 ring-purple-200 bg-purple-500 text-white shadow-lg shadow-purple-300 rounded-lg">Download picture</button>
+    </div>
+</body>
+</html>
