@@ -72,7 +72,8 @@
 
         x-init="
             crop = new Croppie($refs.croppie, {
-                showZoomer: true,        
+                enableZoom: true,
+                viewport: { width:240, height:240 }     
             })
         "
         >
@@ -93,10 +94,10 @@
         <hr class="my-3">
         <!-- step 2 -->
         <p class="capitalize mb-4"> <strong>Step 2.</strong> Choose a picture</p>
-        <div class="flex flex-col space-y-4">
+        <div class="flex flex-col gap-y-4">
             <input x-ref="upload" @change="loadImage" type="file" accept="image/*,.png,.jpg" name="" id="">
             <div x-ref="croppie" class="w-80 h-80 bg-neutral-200 rounded-lg"></div>
-            <p class="text-neutral-400 pt-10"><em>Resize and position as desired & crop</em></p>
+            <p class="text-neutral-400 mt-10"><em>Use slider to zoom. Move image set position as desired & crop</em></p>
         </div>
 
        <button  @click="getResult" class="p-2 ring-2 ring-purple-600 rounded-lg mt-8 bg-purple-50 text-purple-800">Crop picture</button>
