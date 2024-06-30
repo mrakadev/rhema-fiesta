@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--  -->
-    <title>Rhema fiesta profile picture</title>
+    <title>Magnificient profile picture</title>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <!-- Alpine scripts -->
     <script defer src="./scripts/alpine-cdn.min.js"></script>
@@ -63,7 +63,7 @@
                     scale: 4
                 }).then(canvas => {
                     canvas.toBlob((blob) => {
-                        window.saveAs(blob, "rhema-fiesta.png");
+                        window.saveAs(blob, "magniificent-pfp.png");
                     });
                 });
             },
@@ -78,9 +78,9 @@
         "
         >
         <!-- title -->
-        <h3 class="text-xl text-purple-700 capitalize mb-4">create your rhema fiesta profile picture</h3>
-        <!-- step 1 -->
-        <p class="capitalize"> <strong>Step 1.</strong> Enter your first name and last name</p>
+        <h3 class="text-xl text-purple-700 capitalize mb-4">create your Magnificient profile picture</h3>
+        
+        <!-- <p class="capitalize"> <strong>Step 1.</strong> Enter your first name and last name</p>
         <div class="space-y-4">
             <div class="flex flex-col">
                 <label for="" class="text-sm">First Name</label>
@@ -90,10 +90,10 @@
                 <label for="" class="text-sm">Last Name</label>
                 <input type="text" x-model="last_name" class="p-3 bg-neutral-200">
             </div>
-        </div>
+        </div> -->
         <hr class="my-3">
         <!-- step 2 -->
-        <p class="capitalize mb-4"> <strong>Step 2.</strong> Choose a picture</p>
+        <p class="capitalize mb-4"> <strong>Step 1.</strong> Choose a picture</p>
         <div class="flex flex-col gap-y-4">
             <input x-ref="upload" @change="loadImage" type="file" accept="image/*,.png,.jpg" name="" id="">
             <div x-ref="croppie" class="w-80 h-80 bg-neutral-200 rounded-lg"></div>
@@ -104,17 +104,11 @@
 
        <hr class="my-3">
         <!-- step 3 -->
-        <p class="capitalize mb-4"> <strong>Step 3.</strong> Download picture</p>
+        <p class="capitalize mb-4"> <strong>Step 2.</strong> Download picture</p>
 
-       <div class="w-80 h-80 relative bg-green-400" x-ref="picture_ready">
-           <img src="" class="w-full" alt="" x-ref="final">
-           <div class="text-2xl font-bold text-neutral-400 absolute bottom-0 h-16 left-0 w-full bg-[#280d2e]/[0.8] flex">
-                <img src="./logo.webp" class="h-full" alt="rhema-fiesta-logo">
-                <div class="p-2 flex-1 leading-snug flex-wrap font-bold text-base uppercase text-yellow-300">
-                    <p x-text="first_name+' '+last_name"></p>
-                    <p class="text-xs">will be @ #RF2022</p>
-                </div>
-           </div>
+       <div class="w-80 h-80 relative bg-purple-900 flex" x-ref="picture_ready">
+           <img src="" class="w-full rounded-full overflow-clip absolute w-52 aspect-square top-12 left-16" alt="" x-ref="final">
+           <img src="./PFP_frame.png" class="w-full aspect-square z-10" alt=""  srcset="">
        </div>
 
        <!-- download btn -->
