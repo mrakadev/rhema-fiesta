@@ -68,6 +68,14 @@
                 });
             },
 
+            daysToGo: function(){
+                const targetDate = new Date(`2024-08-19`);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0); 
+                const delta = Math.abs(targetDate - today) / (1000 * 3600 * 24);
+                return Math.floor(delta);
+            }
+
         }'
 
         x-init="
@@ -109,6 +117,10 @@
        <div class="w-80 h-80 relative bg-purple-900 flex" x-ref="picture_ready">
            <img src="" class="w-full rounded-full overflow-clip absolute w-52 aspect-square top-12 left-16" alt="" x-ref="final">
            <img src="./PFP_frame.png" class="w-full aspect-square z-10" alt=""  srcset="">
+           <div x-show="daysToGo() >= 1" class="absolute bottom-2 right-2 p-2 rounded-full w-20 h-20 flex flex-col text-purple-900 bg-yellow-500 z-50 text-center">
+                <p x-text="daysToGo" class="text-3xl"></p>
+                <p class="text-xs font-bold">days to go</p>
+           </div>
        </div>
 
        <!-- download btn -->
