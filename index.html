@@ -124,7 +124,10 @@
        </div>
 
        <!-- download btn -->
-       <button  @click="downloadImage" class="p-3 mt-4 ring-2 ring-purple-200 bg-purple-500 text-white shadow-lg shadow-purple-300 rounded-lg">Download picture</button>
+       <button x-bind:disabled="$refs.upload.files.length < 1" @click="downloadImage" 
+                class="p-3 mt-4 ring-2 ring-purple-200 bg-purple-500 
+                disabled:bg-gray-400 disabled:text-gray-500
+                text-white shadow-lg shadow-purple-300 rounded-lg">Download picture</button>
     </div>
 </body>
 </html>
